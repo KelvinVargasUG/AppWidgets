@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_app/Config/Menu/menu_items.dart';
-import 'package:widgets_app/Presentation/Screens/Cards/card_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String name = "home_screen";
