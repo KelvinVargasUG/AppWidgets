@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgets_app/Config/Menu/menu_items.dart';
-import 'package:widgets_app/Presentation/Screens/Button/button_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Widgets App'),
       ),
-      body: _HomeView(),
+      body: const _HomeView(),
     );
   }
 }
@@ -55,7 +55,7 @@ class _CustomListTitle extends StatelessWidget {
         color: colors.primary,
       ),
       onTap: () {
-        Navigator.pushNamed(context, menuItem.link);
+        context.push(menuItem.link);
       },
     );
   }
