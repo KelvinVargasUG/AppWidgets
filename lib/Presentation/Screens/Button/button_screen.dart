@@ -68,6 +68,7 @@ class _BottonsView extends StatelessWidget {
                   backgroundColor: MaterialStatePropertyAll(colors.primary),
                   iconColor: const MaterialStatePropertyAll(Colors.white)),
             ),
+            const CustomButton()
           ],
         ),
       ),
@@ -80,6 +81,22 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final colors = Theme.of(context).colorScheme;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: Material(
+        color: colors.primary,
+        child: InkWell(
+          onTap: () {},
+          child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              child: Text(
+                "Hello",
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
+      ),
+    );
   }
 }
