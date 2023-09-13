@@ -55,4 +55,9 @@ const appMenuItems = <MenuItem>[
       subtitle: "Vistas infinitas y pull refresh",
       link: '/infiniteScroll',
       icon: Icons.list_outlined),
+  MenuItem(
+      title: "Counter Screen",
+      subtitle: "Suma de numeros con riverpod",
+      link: '/counter',
+      icon: Icons.plus_one),
 ];

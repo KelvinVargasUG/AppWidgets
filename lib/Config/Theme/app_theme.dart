@@ -17,10 +17,13 @@ class AppTheme {
       : assert(selectedColor >= 0 && selectedColor < colorList.length,
             'Invalid color index!, Please select a color between 0 and ${colorList.length - 1}');
 
-  ThemeData getTheme() => ThemeData(
+  ThemeData getThemeLigth() => ThemeData(
       useMaterial3: true,
       colorSchemeSeed: colorList[selectedColor],
       appBarTheme: const AppBarTheme(
         centerTitle: true,
       ));
+  ThemeData getThemeDarck() => ThemeData.dark(
+        useMaterial3: true,
+      );
 }
