@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,18 +30,46 @@ final slides = <SlideInfo>[
       caption:
           'Espero te resulte util la aplicación y que puedas usar los componentes mostrados en tu proyecto',
       imageUrl:
-          ('src="https://www.gratistodo.com/wp-content/uploads/2021/09/Fondos-de-pantalla-Rick-y-Morty-Wallpapers-gratistodo.com-1.png"')),
+          ("https://www.gratistodo.com/wp-content/uploads/2021/09/Fondos-de-pantalla-Rick-y-Morty-Wallpapers-gratistodo.com-1.png")),
 ];
 
-class AppTutorial extends StatelessWidget {
+class AppTutorial extends StatefulWidget {
   static const String name = "app_tutorial";
   const AppTutorial({super.key});
+
+  @override
+  State<AppTutorial> createState() => _AppTutorialState();
+}
+
+class _AppTutorialState extends State<AppTutorial> {
+  final PageController pageViewController = PageController();
+  bool endReached = false;
+  @override
+  void initState() {
+    super.initState();
+    pageViewController.addListener(() {
+      final page = pageViewController.page ?? 0;
+      if (page >= (slides.length - 1.5) && !endReached) {
+        setState(() {
+          endReached = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    pageViewController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           PageView(
+              controller: pageViewController,
               physics: const BouncingScrollPhysics(),
               children: slides
                   .map((data) => _Slide(
@@ -48,14 +77,36 @@ class AppTutorial extends StatelessWidget {
                       caption: data.caption,
                       imageUrl: data.imageUrl))
                   .toList()),
-          Positioned(
-              right: 20.0,
-              top: 50.0,
-              child: TextButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: const Text("Skip"))),
+          endReached
+              ? FadeInRight(
+                    from: 15.0,
+                    delay: Duration(milliseconds: 100),child: const SizedBox())
+              : Positioned(
+                  right: 20.0,
+                  top: 50.0,
+                  child: FadeInRight(
+                    from: 15.0,
+                    delay: Duration(milliseconds: 100),
+                    child: TextButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        child: const Text("Skip")),
+                  )),
+          endReached
+              ? Positioned(
+                  bottom: 30.0,
+                  right: 30.0,
+                  child: FadeInRight(
+                    from: 15.0,
+                    delay: const Duration(milliseconds: 50),
+                    child: FilledButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        child: const Text("Empezar")),
+                  ))
+              : const SizedBox()
         ],
       ),
     );
@@ -80,7 +131,7 @@ class _Slide extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(imageUrl),
+              Center(child: Image.network(imageUrl)),
               const SizedBox(height: 30.0),
               Text(title, style: titleStyle),
               const SizedBox(height: 20.0),
