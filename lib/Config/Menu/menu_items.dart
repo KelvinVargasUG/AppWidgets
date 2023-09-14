@@ -60,4 +60,9 @@ const appMenuItems = <MenuItem>[
       subtitle: "Suma de numeros con riverpod",
       link: '/counter',
       icon: Icons.plus_one),
+  MenuItem(
+      title: "Theme Changer",
+      subtitle: "Cambiar el color de la app",
+      link: '/themeChanger',
+      icon: Icons.color_lens_rounded),
 ];
